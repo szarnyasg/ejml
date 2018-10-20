@@ -1482,6 +1482,38 @@ public class CommonOps_DSCC {
 
     /**
      * <p>
+     * Computes the sum of each row in the input matrix and returns the results in a vector:<br>
+     * <br>
+     * b<sub>j</sub> = sum(i=1:n ; a<sub>ji</sub>)
+     * </p>
+     *
+     * @param input Input matrix whose rows are summed.
+     * @param output Optional storage for output.  Must be a vector. If null a row vector is returned. Modified.
+     * @return Vector containing the sum of each row in the input.
+     */
+    public static DMatrixRMaj sumRows(DMatrixSparseCSC input , DMatrixRMaj output ) {
+        if( output == null ) {
+            output = new DMatrixRMaj(input.numRows,1);
+        } else {
+            output.reshape(input.numRows,1);
+        }
+
+        for (int col = 0; col < input.numCols; col++) {
+            int idx0 = input.col_idx[col];
+            int idx1 = input.col_idx[col+1];
+
+            for (int i = idx0; i < idx1; i++) {
+                int row = input.nz_rows[i];
+                double value = input.nz_values[i];
+
+                output.add(row, 0, value);
+            }
+        }
+        return output;
+    }
+
+    /**
+     * <p>
      * This computes the trace of the matrix:<br>
      * <br>
      * trace = &sum;<sub>i=1:n</sub> { a<sub>ii</sub> }<br>
