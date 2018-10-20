@@ -30,8 +30,7 @@ import static org.ejml.sparse.csc.misc.TriangularSolver_DSCC.adjust;
 import static org.ejml.sparse.csc.mult.ImplSparseSparseMult_DSCC.multAddColA;
 
 /**
- * Implementation class.  Not recommended for direct use.  Instead use {@link CommonOps_DSCC}
- * instead.
+ * Implementation class.  Not recommended for direct use. Use {@link CommonOps_DSCC} instead.
  *
  * @author Peter Abeles
  */
